@@ -1,0 +1,35 @@
+body{
+  margin: 0;
+}
+.page{
+  max-width: 1366px;
+  margin: 0 auto;
+}
+.cuadricula{
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
+
+.main__dark{
+  background-color: rgb(24, 24, 24);
+  color: white;
+}
+.main__light{
+  background-color: rgb(238, 238, 238);
+  color: black;
+}
+
+.movies{
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(3,1fr);
+}
+.movie__image{
+  width: 100%;
+}
+.movie__title{
+  font-size: 2rem;
+}
+.movie__stars{
+  font-size: 3rem;
+}
