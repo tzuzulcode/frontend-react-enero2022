@@ -5,7 +5,7 @@ export default function Movie({movie}) {
     return <article className='movie'>
         {/* Bloque contenedor */}
         <Link to={"/details/"+movie.id}><h2 className='movie__title'>{movie.title}</h2></Link>
-        <div className='movie__stars'>🍉 🍉 🍉 🍉 🍉</div>
+        <div className='movie__stars'>{movie.stars/movie.numberOfReviews}</div>
         <img className='movie__image' src={movie.img} alt={movie.title}></img>
     </article>
 }
