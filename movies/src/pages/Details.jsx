@@ -6,7 +6,7 @@ import { moviesContext } from '../context/MoviesContext';
 
 export default function Details() {
   const {id} = useParams()
-  const {movies,reviews,setReviews,setMovies} = useContext(moviesContext)
+  const {movies,reviews,addReview} = useContext(moviesContext)
   const comentario = useRef()
   const rating = useRef()
   //const navigate = useNavigate()
@@ -22,13 +22,10 @@ export default function Details() {
     return <Navigate to="/notfound"/>
   }
 
-  const addReview = ()=>{
-    let valueComment = comentario.current.value
+  const add = ()=>{
+    let comment = comentario.current.value
     let stars = rating.current.value
-    movie.stars= movie.stars + parseInt(stars)
-    movie.numberOfReviews++
-    setMovies([...movies])
-    setReviews([...reviews,{id:reviews.length,idMovie:movie.id,comment:valueComment}])
+    addReview(movie,stars,comment)
   }
 
   return <div>
@@ -43,7 +40,7 @@ export default function Details() {
           <option value={4}>4</option>
           <option value={5}>5</option>
         </select>
-        <button onClick={addReview}>Agregar review</button>
+        <button onClick={add}>Agregar review</button>
       </div>
 
       {/* && (and): Operador de cortocircuito */}
@@ -51,7 +48,6 @@ export default function Details() {
       {reviews.map(review=>review.idMovie===id&&<p>{review.comment}</p>)}
 
       {/* Mostrar comentarios */}
-      
   </div>;
 }
 
