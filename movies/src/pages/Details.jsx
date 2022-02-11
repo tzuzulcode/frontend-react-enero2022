@@ -31,6 +31,7 @@ export default function Details() {
   return <div>
       <p>Details {id}</p>
       <Movie movie={movie}></Movie>
+      {console.log(reviews)}
       <div>
         <input ref={comentario} type="text"></input>
         <select ref={rating}>
@@ -45,7 +46,7 @@ export default function Details() {
 
       {/* && (and): Operador de cortocircuito */}
       {/* || (or)*/}
-      {reviews.map(review=>review.idMovie===id&&<p>{review.comment}</p>)}
+      {reviews.map(review=>review.idMovie===id&&<p key={review.id}>{review.comment}</p>)}
 
       {/* Mostrar comentarios */}
   </div>;
