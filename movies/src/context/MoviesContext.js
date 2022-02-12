@@ -13,18 +13,21 @@ export default function MoviesContext({children}) {
 
     const addReview = (movie,stars,comment)=>{
         setMovies({type:'addStars',movie,stars})
-        dispatchReviews({type:'addReview',idMovie:movie.id,comment})
+        dispatchReviews({type:'addReview',idMovie:movie._id,comment})
         // setReviews([...reviews,{id:reviews.length,idMovie:movie.id,comment}])
     }
     //Reto: Cambiar las reviews del estado a reducers
 
     useEffect(()=>{
-        fetch("http://localhost:4000/movies")
+        fetch("https://backendtzuzulcode.wl.r.appspot.com/movies")
         .then(res=>res.json())
-        .then(data=>console.log(data))
-    })
+        .then(data=>{
+            console.log(data)
+            setMovies({type:"addMovies",movies:data})
+        })
+    },[])
 
-  return <moviesContext.Provider value={{movies:movies.movies,addReview,reviews:reviews.reviews}}>
-      {children}
-  </moviesContext.Provider>
+    return <moviesContext.Provider value={{movies:movies.movies,addReview,reviews:reviews.reviews}}>
+        {children}
+    </moviesContext.Provider>
 }

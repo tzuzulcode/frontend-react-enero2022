@@ -11,7 +11,7 @@ export default function Details() {
   const rating = useRef()
   //const navigate = useNavigate()
 
-  const movie = movies.filter(movie=>movie.id===id)[0]
+  const movie = movies.filter(movie=>movie._id===id)[0]
 
 
 
@@ -46,7 +46,10 @@ export default function Details() {
 
       {/* && (and): Operador de cortocircuito */}
       {/* || (or)*/}
-      {reviews.map(review=>review.idMovie===id&&<p key={review.id}>{review.comment}</p>)}
+      {reviews.map(
+        review=>review.idMovie===id
+        &&<p key={review.id}>{review.comment}</p>)
+      }
 
       {/* Mostrar comentarios */}
   </div>;
