@@ -6,7 +6,7 @@ import { moviesContext } from '../context/MoviesContext';
 
 export default function Details() {
   const {id} = useParams()
-  const {movies,reviews,addReview} = useContext(moviesContext)
+  const {movies,reviews,addReview,loading} = useContext(moviesContext)
   const comentario = useRef()
   const rating = useRef()
   //const navigate = useNavigate()
@@ -18,7 +18,7 @@ export default function Details() {
   // if(!movie){
   //   return <NotFound/>
   // }
-  if(!movie){
+  if(!movie && !loading){
     return <Navigate to="/notfound"/>
   }
 
@@ -28,7 +28,7 @@ export default function Details() {
     addReview(movie,stars,comment)
   }
 
-  return <div>
+  return loading?<p>Loading...</p>:<div>
       <p>Details {id}</p>
       <Movie movie={movie}></Movie>
       {console.log(reviews)}
