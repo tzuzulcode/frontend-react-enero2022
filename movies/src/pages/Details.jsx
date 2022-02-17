@@ -13,8 +13,6 @@ export default function Details() {
 
   const movie = movies.filter(movie=>movie._id===id)[0]
 
-
-
   // if(!movie){
   //   return <NotFound/>
   // }
