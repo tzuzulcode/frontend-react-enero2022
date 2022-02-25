@@ -1,24 +1,31 @@
-import {useDispatch, useSelector} from 'react-redux'
-import { login, logout } from './features/user/userSlice';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import {BrowserRouter,Routes,Route} from 'react-router-dom'
+import { login } from './features/user/userSlice';
+import Home from './pages/Home';
+import Login from './pages/Login';
 
 function App() {
-  
-  // ¿Quiero consultar el estado global?
-  const user = useSelector((state)=>state.user)
-
-  // ¿Quiero actualizar el estado global?
   const dispatch = useDispatch()
+  useEffect(()=>{
+    fetch("http://localhost:4000/auth/validate",{
+      method:"POST",
+      credentials:'include'
+    })
+    .then(res=>res.json())
+    .then(data=>{
+      dispatch(login(data.user.firstName))
+    })
+  },[])
 
   return (
-    <div className="App">
-      {console.log(user)}
-     <p>Usuario: {user.logged?"Bienvenido "+user.name:"Inicia sesión"}</p>
-     <button onClick={()=>{dispatch(login("Tzuzul"))}}>Iniciar sesión</button>
-     <button onClick={()=>{dispatch(logout())}}>Cerrar sesión</button>
-    </div>
-
-    // Agregar un router: Pagina principal, Pagina de inicio de sesión. 
-    // Iconos de redes sociales: Google, Facebook, Twitter, GitHub
+    <BrowserRouter>
+      <Routes>
+        {/* <Route path="*" element={<NotFound/>}/> */}
+        <Route path="/" element={<Home/>}/>
+        <Route path="/login" element={<Login/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 }
 
