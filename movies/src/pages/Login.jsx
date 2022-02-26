@@ -28,7 +28,6 @@ export default function Login() {
             console.log(user)
             setUser({logged:true,name:user.data.firstName})
         }).catch(error=>setUser({logged:false}))
-        
     }
   return <div className='page'>
       <p>{user.logged?"Bienvenido "+user.name:"Sin sesión"}</p>
