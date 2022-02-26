@@ -1,6 +1,8 @@
 import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {login,logout} from '../features/user/userSlice'
+import {FcGoogle} from 'react-icons/fc'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 export default function Login() {
     // ¿Quiero consultar el estado global?
@@ -9,11 +11,14 @@ export default function Login() {
     // ¿Quiero actualizar el estado global?
     const dispatch = useDispatch()
 
+    //Navegación
+    const navigate = useNavigate()
+
     const iniciarSesion = (event) => {
         const {email,password} = event.target
 
         event.preventDefault()
-        fetch("http://localhost:4000/auth/login",{
+        fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
             method:"POST",
             credentials:'include',
             headers:{
@@ -25,7 +30,8 @@ export default function Login() {
             })
         }).then(res=>res.json())
         .then(user=>{
-            console.log(user)
+            dispatch(login(user.firstName))
+            navigate(-1)
         }).catch(error=>console.log(error))
     }
 
@@ -38,11 +44,13 @@ export default function Login() {
                 <input type="password" name="password" />
                 <button>Iniciar sesión</button>
             </form>
+            <a href="https://backendtzuzulcode.wl.r.appspot.com/auth/google">
+                <span>
+                    Inicia sesión con <FcGoogle/> 
+                </span>
+            </a>
             {/* <button onClick={()=>{dispatch(login("Tzuzul"))}}>Iniciar sesión</button> */}
             <button onClick={()=>{dispatch(logout())}}>Cerrar sesión</button>
         </div>
-
-        // Agregar un router: Pagina principal, Pagina de inicio de sesión. 
-        // Iconos de redes sociales: Google, Facebook, Twitter, GitHub
     )
 }
