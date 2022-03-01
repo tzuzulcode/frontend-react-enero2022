@@ -8,16 +8,16 @@ import Login from './pages/Login';
 
 function App() {
   const dispatch = useDispatch()
-  useEffect(()=>{
-    fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/validate",{
-      method:"POST",
-      credentials:'include'
-    })
-    .then(res=>res.json())
-    .then(data=>{
-      dispatch(login(data.user.firstName))
-    })
-  },[])
+  // useEffect(()=>{
+  //   fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/validate",{
+  //     method:"POST",
+  //     credentials:'include'
+  //   })
+  //   .then(res=>res.json())
+  //   .then(data=>{
+  //     dispatch(login(data.user.firstName))
+  //   })
+  // },[])
 
   return (
     <>

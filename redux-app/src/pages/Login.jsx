@@ -2,7 +2,7 @@ import React from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import {login,logout} from '../features/user/userSlice'
 import {FcGoogle} from 'react-icons/fc'
-import { useLocation, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
     // ¿Quiero consultar el estado global?
@@ -14,25 +14,31 @@ export default function Login() {
     //Navegación
     const navigate = useNavigate()
 
-    const iniciarSesion = (event) => {
-        const {email,password} = event.target
+    // const iniciarSesion = (event) => {
+    //     const {email,password} = event.target
 
+    //     event.preventDefault()
+    //     fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
+    //         method:"POST",
+    //         credentials:'include',
+    //         headers:{
+    //             "Content-Type":"application/json"
+    //         },
+    //         body:JSON.stringify({
+    //             email:email.value,
+    //             password:password.value
+    //         })
+    //     }).then(res=>res.json())
+    //     .then(user=>{
+    //         dispatch(login(user.firstName))
+    //         navigate(-1)
+    //     }).catch(error=>console.log(error))
+    // }
+
+    const iniciarSesion = (event) => {
         event.preventDefault()
-        fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
-            method:"POST",
-            credentials:'include',
-            headers:{
-                "Content-Type":"application/json"
-            },
-            body:JSON.stringify({
-                email:email.value,
-                password:password.value
-            })
-        }).then(res=>res.json())
-        .then(user=>{
-            dispatch(login(user.firstName))
-            navigate(-1)
-        }).catch(error=>console.log(error))
+        const {email:{value:email},password:{value:password}} = event.target
+        dispatch(login({email,password}))
     }
 
     return (
@@ -44,6 +50,7 @@ export default function Login() {
                 <input type="password" name="password" />
                 <button>Iniciar sesión</button>
             </form>
+           {user.loading&&<p>Loading...</p>}
             <a href="https://backendtzuzulcode.wl.r.appspot.com/auth/google">
                 <span>
                     Inicia sesión con <FcGoogle/> 
