@@ -20,6 +20,33 @@ export const login = createAsyncThunk("user/login",async (credentials,thunkAPI)=
     return data
 })
 
+export const validate = createAsyncThunk("user/validate",async (params,thunkAPI)=>{
+    const response = await fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/validate",{
+      method:"POST",
+      credentials:'include'
+    })
+
+    const data = await response.json()
+
+    console.log(data)
+    if(!data.logged){
+        console.log("Lanzando error...")
+        return thunkAPI.rejectWithValue("Error de loggeo")
+    }
+
+    return data
+})
+
+// export const validate = createAsyncThunk("user/validate",(params,thunkAPI)=>{
+//     return axios.post("https://backendtzuzulcode.wl.r.appspot.com/auth/validate",{
+//       method:"POST",
+//       credentials:'include'
+//     })
+//     .then(res=>res.json())
+//     .then(data=>thunkAPI.fulfillWithValue(data))
+//     .catch(error=>thunkAPI.rejectWithValue("Error de loggeo"))
+// })
+
 
 const userSlice = createSlice({
     name:"user",
@@ -57,6 +84,23 @@ const userSlice = createSlice({
             state.loading = false
             state.error = true
             state.message = action.payload.message
+        })
+
+        builder.addCase(validate.pending,(state,action)=>{
+            state.loading = true
+        })
+
+        builder.addCase(validate.fulfilled,(state,action)=>{
+            state.logged = true
+            state.name = action.payload?.user?.firstName
+            state.error = false
+        })
+
+        builder.addCase(validate.rejected,(state,action)=>{
+            console.log(action.payload)
+            state.error = true
+            state.logged = false
+            state.message= "Error"
         })
     }
 })

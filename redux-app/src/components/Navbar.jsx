@@ -20,6 +20,8 @@ export default function Navbar() {
         })
       }
 
+      // Reto: Transformar signOut a AsyncThunk
+
   return (
     <nav>
         <ul>
