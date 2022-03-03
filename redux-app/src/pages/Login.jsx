@@ -3,6 +3,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import {login,logout} from '../features/user/userSlice'
 import {FcGoogle} from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
+import { useEffect } from 'react'
 
 export default function Login() {
     // ¿Quiero consultar el estado global?
@@ -14,26 +15,11 @@ export default function Login() {
     //Navegación
     const navigate = useNavigate()
 
-    // const iniciarSesion = (event) => {
-    //     const {email,password} = event.target
-
-    //     event.preventDefault()
-    //     fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
-    //         method:"POST",
-    //         credentials:'include',
-    //         headers:{
-    //             "Content-Type":"application/json"
-    //         },
-    //         body:JSON.stringify({
-    //             email:email.value,
-    //             password:password.value
-    //         })
-    //     }).then(res=>res.json())
-    //     .then(user=>{
-    //         dispatch(login(user.firstName))
-    //         navigate(-1)
-    //     }).catch(error=>console.log(error))
-    // }
+    useEffect(()=>{
+        if(user.logged){
+            navigate("/")
+        }
+    },[user])
 
     const iniciarSesion = (event) => {
         event.preventDefault()
@@ -50,6 +36,7 @@ export default function Login() {
                 <input type="password" name="password" />
                 <button>Iniciar sesión</button>
             </form>
+            {user.error&&<p>{user.message}</p>}
            {user.loading&&<p>Loading...</p>}
             <a href="https://backendtzuzulcode.wl.r.appspot.com/auth/google">
                 <span>

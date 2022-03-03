@@ -14,7 +14,10 @@ export const login = createAsyncThunk("user/login",async (credentials,thunkAPI)=
             })
         })
     const data = await response.json()
-    console.log(data)
+    if(!data.id){
+        //action.payload del reducer (rejected)
+        return thunkAPI.rejectWithValue(data)
+    }
 
     //action.payload del reducer (fullfilled)
     return data
@@ -28,13 +31,21 @@ export const validate = createAsyncThunk("user/validate",async (params,thunkAPI)
 
     const data = await response.json()
 
-    console.log(data)
     if(!data.logged){
-        console.log("Lanzando error...")
         return thunkAPI.rejectWithValue("Error de loggeo")
     }
 
     return data
+})
+
+export const logout = createAsyncThunk("user/logout",async ()=>{
+    const res = await fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/logout",{
+        method:"POST",
+        credentials:'include'
+    })
+    const user = await  res.json()
+
+    return user
 })
 
 // export const validate = createAsyncThunk("user/validate",(params,thunkAPI)=>{
@@ -70,7 +81,10 @@ const userSlice = createSlice({
     // Thunks
     extraReducers(builder){
         builder.addCase(login.pending,(state,action)=>{
-            state.loading=true
+            state.loading = true
+            state.error = false
+            state.message = ""
+            state.name = ""
         })
 
         builder.addCase(login.fulfilled,(state,action)=>{
@@ -94,16 +108,34 @@ const userSlice = createSlice({
             state.logged = true
             state.name = action.payload?.user?.firstName
             state.error = false
+            state.loading = false
         })
 
         builder.addCase(validate.rejected,(state,action)=>{
-            console.log(action.payload)
+            state.logged = false
+            state.loading = false
+        })
+
+        builder.addCase(logout.pending,(state,action)=>{
+            state.loading = true
+        })
+
+        builder.addCase(logout.fulfilled,(state,action)=>{
+            state.logged = false
+            state.name = ""
+            state.error = false
+            state.loading = false
+            state.message = ""
+        })
+
+        builder.addCase(logout.rejected,(state,action)=>{
             state.error = true
             state.logged = false
-            state.message= "Error"
+            state.message = "Error"
+            state.loading = false
         })
     }
 })
 
-export const {logout} = userSlice.actions // Esto se utiliza en el dispatch
+// export const {logout} = userSlice.actions // Esto se utiliza en el dispatch
 export default userSlice.reducer // Esto en el store

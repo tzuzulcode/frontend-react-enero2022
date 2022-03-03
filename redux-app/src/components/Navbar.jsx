@@ -10,17 +10,8 @@ export default function Navbar() {
     const dispatch = useDispatch()
 
     const signOut = () =>{
-        fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/logout",{
-          method:"POST",
-          credentials:'include'
-        })
-        .then(res=>res.json())
-        .then(data=>{
-          dispatch(logout())
-        })
+        dispatch(logout())
       }
-
-      // Reto: Transformar signOut a AsyncThunk
 
   return (
     <nav>
