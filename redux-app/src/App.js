@@ -13,17 +13,21 @@ function App() {
   },[])
 
   return (
-    <>
+    
+    
       
       <BrowserRouter>
         <Navbar/>
+        <div className=' max-w-screen-xl mx-auto'>
         <Routes>
           {/* <Route path="*" element={<NotFound/>}/> */}
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
         </Routes>
+        </div>
       </BrowserRouter>
-    </>
+
+    
   );
 }
 

@@ -14,10 +14,20 @@ export default function Navbar() {
       }
 
   return (
-    <nav>
-        <ul>
-            {logged?<li onClick={signOut}>Cerrar sesión</li>:<li><Link to="/login">Iniciar sesión</Link></li>}
-        </ul>
+    <nav className="bg-lavender-700 py-3">
+        <div className='max-w-screen-xl mx-auto flex justify-between'>
+          <p>Tzuzul Code</p>
+          <ul className="flex ">
+              <li>Link</li>
+              <li>Link</li>
+              <li>Link</li>
+              <li>Link</li>
+              <li>Link</li>
+              <li>Link</li>
+              <li>Link</li>
+              {logged?<li onClick={signOut}>Cerrar sesión</li>:<li><Link to="/login">Iniciar sesión</Link></li>}
+          </ul>
+        </div>
     </nav>
   )
 }
