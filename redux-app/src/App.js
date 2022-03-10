@@ -18,7 +18,7 @@ function App() {
       
       <BrowserRouter>
         <Navbar/>
-        <div className=' max-w-screen-xl mx-auto'>
+        <div className='max-w-screen-xl mx-auto'>
         <Routes>
           {/* <Route path="*" element={<NotFound/>}/> */}
           <Route path="/" element={<Home/>}/>
