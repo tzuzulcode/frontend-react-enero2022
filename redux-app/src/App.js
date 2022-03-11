@@ -5,6 +5,7 @@ import Navbar from './components/Navbar';
 import { validate } from './features/user/userSlice';
 import Home from './pages/Home';
 import Login from './pages/Login';
+import MyTeams from './pages/MyTeams';
 
 function App() {
   const dispatch = useDispatch()
@@ -23,6 +24,7 @@ function App() {
           {/* <Route path="*" element={<NotFound/>}/> */}
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/my_teams" element={<MyTeams/>}/>
         </Routes>
         </div>
       </BrowserRouter>
