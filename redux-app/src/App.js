@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Navbar from './components/Navbar';
 import { validate } from './features/user/userSlice';
+import DragAndDrop from './pages/DragAndDrop';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyTeams from './pages/MyTeams';
@@ -25,6 +26,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/my_teams" element={<MyTeams/>}/>
+          <Route path="/drag_and_drop" element={<DragAndDrop/>}/>
         </Routes>
         </div>
       </BrowserRouter>

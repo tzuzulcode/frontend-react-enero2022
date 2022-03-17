@@ -1,27 +1,18 @@
 import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+import { post } from '../../api'
 
 
-// export const login = createAsyncThunk("user/login",async (credentials,thunkAPI)=>{
-//     const response = await fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/login",{
-//             method:"POST",
-//             credentials:'include',
-//             headers:{
-//                 "Content-Type":"application/json"
-//             },
-//             body:JSON.stringify({
-//                 email:credentials.email,
-//                 password:credentials.password
-//             })
-//         })
-//     const data = await response.json()
-//     if(!data.id){
-//         //action.payload del reducer (rejected)
-//         return thunkAPI.rejectWithValue(data)
-//     }
+export const login = createAsyncThunk("user/login",async (credentials,thunkAPI)=>{
+    const response = await post("/auth/login",{
+        email:credentials.email,
+        password:credentials.password
+    })
 
-//     //action.payload del reducer (fullfilled)
-//     return data
-// })
+    console.log(response.data)
+
+    //action.payload del reducer (fullfilled)
+    return response.data
+})
 
 // export const validate = createAsyncThunk("user/validate",async (params,thunkAPI)=>{
 //     const response = await fetch("https://backendtzuzulcode.wl.r.appspot.com/auth/validate",{
@@ -87,26 +78,26 @@ const userSlice = createSlice({
         }
     },
     // Thunks
-    // extraReducers(builder){
-    //     builder.addCase(login.pending,(state,action)=>{
-    //         state.loading = true
-    //         state.error = false
-    //         state.message = ""
-    //         state.name = ""
-    //     })
+    extraReducers(builder){
+        builder.addCase(login.pending,(state,action)=>{
+            state.loading = true
+            state.error = false
+            state.message = ""
+            state.name = ""
+        })
 
-    //     builder.addCase(login.fulfilled,(state,action)=>{
-    //         state.loading = false
-    //         state.logged = true
-    //         state.error = false
-    //         state.name = action.payload.firstName
-    //     })
+        builder.addCase(login.fulfilled,(state,action)=>{
+            state.loading = false
+            state.logged = true
+            state.error = false
+            state.name = action.payload.name
+        })
 
-    //     builder.addCase(login.rejected,(state,action)=>{
-    //         state.loading = false
-    //         state.error = true
-    //         state.message = action.payload.message
-    //     })
+        builder.addCase(login.rejected,(state,action)=>{
+            state.loading = false
+            state.error = true
+            state.message = action.payload.message
+        })
 
     //     builder.addCase(validate.pending,(state,action)=>{
     //         state.loading = true
@@ -142,8 +133,8 @@ const userSlice = createSlice({
     //         state.message = "Error"
     //         state.loading = false
     //     })
-    // }
+    }
 })
 
-export const {login,logout,validate} = userSlice.actions // Esto se utiliza en el dispatch
+export const {logout,validate} = userSlice.actions // Esto se utiliza en el dispatch
 export default userSlice.reducer // Esto en el store
