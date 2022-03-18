@@ -7,6 +7,7 @@ import DragAndDrop from './pages/DragAndDrop';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyTeams from './pages/MyTeams';
+import Team from './pages/Team';
 
 function App() {
   const dispatch = useDispatch()
@@ -26,6 +27,7 @@ function App() {
           <Route path="/" element={<Home/>}/>
           <Route path="/login" element={<Login/>}/>
           <Route path="/my_teams" element={<MyTeams/>}/>
+          <Route path="/my_teams/:idTeam" element={<Team/>}/>
           <Route path="/drag_and_drop" element={<DragAndDrop/>}/>
         </Routes>
         </div>
