@@ -4,6 +4,7 @@ import {login,logout} from '../features/user/userSlice'
 import {FcGoogle} from 'react-icons/fc'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
+import { URL } from '../config'
 
 export default function Login() {
     // ¿Quiero consultar el estado global?
@@ -50,7 +51,7 @@ export default function Login() {
                     <p className=''>Ó</p>
                     <div className=' h-[1px] bg-gray-400 w-full'></div>
                 </div>
-                <a className='flex items-center gap-5 justify-center border border-lavender-400 p-2 mt-5 hover:bg-lavender-400' href="https://backendtzuzulcode.wl.r.appspot.com/auth/google">
+                <a className='flex items-center gap-5 justify-center border border-lavender-400 p-2 mt-5 hover:bg-lavender-400' href={`${URL}/auth/google`}>
                     <FcGoogle/><span className='text-lavender-900'>Inicia sesión con</span>
                 </a>
                 {/* <button onClick={()=>{dispatch(login("Tzuzul"))}}>Iniciar sesión</button> */}
