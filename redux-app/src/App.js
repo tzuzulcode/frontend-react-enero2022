@@ -4,6 +4,7 @@ import {BrowserRouter,Routes,Route} from 'react-router-dom'
 import Navbar from './components/Navbar';
 import { validate } from './features/user/userSlice';
 import DragAndDrop from './pages/DragAndDrop';
+import DragAndDrop2 from './pages/DragAndDrop2';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import MyTeams from './pages/MyTeams';
@@ -29,6 +30,7 @@ function App() {
           <Route path="/my_teams" element={<MyTeams/>}/>
           <Route path="/my_teams/:idTeam" element={<Team/>}/>
           <Route path="/drag_and_drop" element={<DragAndDrop/>}/>
+          <Route path="/drag_and_drop2" element={<DragAndDrop2/>}/>
         </Routes>
         </div>
       </BrowserRouter>

@@ -26,8 +26,8 @@ export default function Navbar() {
               <NavItem to="/" title={"Link"}/>
               <NavItem to="/" title={"Link"}/>
               <NavItem to="/" title={"Link"}/>
-              <NavItem to="/" title={"Link"}/>
               <NavItem to="/drag_and_drop" title={"DnD"}/>
+              <NavItem to="/drag_and_drop2" title={"DnD2"}/>
               {logged&&<NavItem to="/my_teams" title={"My teams"}/>}
 
               {logged?<li onClick={signOut}>Cerrar sesión</li>:<NavItem to="/login" title={"Iniciar sesión"}/>}
