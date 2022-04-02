@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import {Elements, PaymentElement} from "@stripe/react-stripe-js"
+import {Elements} from "@stripe/react-stripe-js"
 import { loadStripe } from '@stripe/stripe-js'
 import {post} from "../api"
+import FormPayment from '../components/FormPayment'
 
 const stripe = loadStripe("pk_test_51KTd1dCxJ8HWxsAUvHdkJU90wXuUHO4qa4bF5dq3A7kCPWLAiaPnQ4bDpvBqIVMHPdABDwVMODmDff6jl8ok59OJ00SeHORvaW")
 
@@ -18,16 +19,14 @@ export default function Payment() {
         })
     },[])
 
+    
+
   return (
     <div>
-        {console.log(clientSecret)}
         {clientSecret&&<Elements stripe={stripe} options={{
             clientSecret
         }}>
-            <form>
-                <PaymentElement id='pay'/>
-                <button>submit</button>
-            </form>
+            <FormPayment/>
         </Elements>}
     </div>
   )
