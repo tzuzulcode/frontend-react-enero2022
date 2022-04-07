@@ -13,6 +13,7 @@ const get = async (url)=>{
 }
 
 const post = async (url,data)=>{
+    instance.delete()
     return await instance.post(url,data,{
         withCredentials:true
     })
